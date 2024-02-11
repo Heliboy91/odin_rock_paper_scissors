@@ -33,7 +33,6 @@ function getComputerSelection(){
 function getPlayerSelection(){
     let playerChoice = prompt("Choose 'R'- rock / 'P'- paper / 'S'-scissors");
     let lowCasedChoice = playerChoice.toLowerCase();
-    console.log("Lowcased choice: " + lowCasedChoice);
     let selected = "";
     if (lowCasedChoice[0] == "r"){
         selected = "rock";
@@ -54,9 +53,6 @@ function getPlayerSelection(){
 
 
 
-
-
-
 /* 
 3. Play a single round using "playerSelection" and "computerSelection"
     - create the function "round" that takes in two variable
@@ -68,11 +64,8 @@ function getPlayerSelection(){
 */
 
 function round(computerChoice, playerChoice) {
-    console.log("Computer: " + computerChoice + " VS " + "Player: " + playerChoice);
     
-    //messages
-  
-    
+   
     //deciding outcomes
     function outcome(){
         let outcome;
@@ -98,7 +91,7 @@ function round(computerChoice, playerChoice) {
     }
 
     outcome();
-    showMessage(outcome())
+
     //showing message
     function showMessage(result){
         
@@ -117,33 +110,47 @@ function round(computerChoice, playerChoice) {
                 message = tieMessage;
                 break;
         }
-        return message;
+        alert (message);
     }
-    
-    
-    console.log("Outcome function: " + outcome());
-    console.log("Showmessage function: " + showMessage(outcome()));
+    showMessage(outcome())
+  
 
    
+    return outcome();
+}
+
+
+
+
+    
+
+/* 
+4.Create the function playGame() using the other functions
+    - we add the round() function as parameter;
+    - to keep score, we create the "score" variable set to zero
+    - we loop 5 times. After games, we increment the "score" variable in case we win
+    - after the 5 games, in case wi more 3 or more times, we show a final message with scores 
+ 
+ */
+
+
+function playGame() {
+    let won = 0;
+   
+
+    for(let i=1; i < 5; i++) {
+       let a = round(getComputerSelection(),getPlayerSelection());
+        if(a == "win") {
+            won +=1 ;
+        }
+        
+    }
+    
+    alert("You won: " + won +  " / 5");
 
 }
 
-round(getComputerSelection(), getPlayerSelection());
-
-    
-
-
-
-
-
-
-
-
-//Return a string with Winner/tie
-//Make the player's choise case insensitive
-
-//Create the function playGame(), which nests all the functions
-// Plays 5 rounds
+playGame();
 
 
 
