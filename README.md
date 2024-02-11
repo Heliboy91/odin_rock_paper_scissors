@@ -1,0 +1,2 @@
+# odin_rock_paper_scissors
+Rock_paper_scissors_game with javascript
