@@ -22,7 +22,7 @@ function getComputerSelection(){
 }
 
 
-
+//------------------------------------------------------------------------------------
 
 /* 
 2. Create the playerSelection variable
@@ -51,7 +51,7 @@ function getPlayerSelection(){
     return selected;
 }
 
-
+//---------------------------------------------------------------------------------
 
 /* 
 3. Play a single round using "playerSelection" and "computerSelection"
@@ -119,17 +119,13 @@ function round(computerChoice, playerChoice) {
     return outcome();
 }
 
-
-
-
-    
-
+//------------------------------------------------------------------------------------
 /* 
 4.Create the function playGame() using the other functions
     - we add the round() function as parameter;
-    - to keep score, we create the "score" variable set to zero
-    - we loop 5 times. After games, we increment the "score" variable in case we win
-    - after the 5 games, in case wi more 3 or more times, we show a final message with scores 
+    - to keep score, we create the "won" variable set to zero
+    - we loop 5 times. After each game, we increment the "won" variable in case we win
+     
  
  */
 
