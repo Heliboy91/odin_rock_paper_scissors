@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROCK VS PAPER VS SCISSORS</title>
-    <script src="game.js"></script>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ROCK VS PAPER VS SCISSORS</title>
+        <link rel="stylesheet" href="game.css">
+    </head>
+    <body>
+          <div id="choice">
+          <img id="rock" src="img/rock.jpg" alt="from Vectorshock">
+          <img id="paper" src="img/paper.jpg" alt="from Vectorshock">
+          <img id="scissors" src="img/scissors.jpg" alt="from Vectorshock">   
+            
+        </div>
+        <div id="mid">
+          <h2>History</h2>
+          <div id="history"></div>
+        </div>
+        <div id ="score">
+            <h1>Score</h1>
+            <table>
+              <tr>
+                <td>You</td>
+                <td>Computer</td>
+              </tr>
+              <tr>
+                <td id="playerid">0</td>
+                <td id="computerid">0</td>
+              </tr>
+            </table>
+           
+        </div>
+       
     
-</body>
+    </body>
+    <script src="game.js"></script>
+
+
+
 </html>

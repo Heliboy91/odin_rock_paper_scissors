@@ -1,69 +1,34 @@
 
-/*
-1. Create function getComputerChoice: randomly returns rock,paper,or scissors for computer
-    -create an array with the values
-    -use math.random() to pick one value from the array
-    -create random number
-    -multiply it with the array's length
-    -round it to integer
-    -use number as index-number in "arr" 
-    -save it in the choice variable
-    -return the variable 
-*/
-
+//Computer randomli picks rock/paper/scissors and return the value
 function getComputerSelection(){
     const arr = ["rock", "paper", "scissors"];
     let a = Math.random() * arr.length;
     let b = Math.floor(a);
     let choice = arr[Math.floor(Math.random() * arr.length)];
     return choice;
-    
+}
 
+//Based on the html "id", we store and return our selection in the "selection" variable
+function getPlayerSelection(button_id){
+    let selection = "";
+    switch(button_id) {
+        case "rock":
+            selection = "rock";
+            break;
+        case "paper":
+            selection = "paper";
+            break;
+        case "scissors":
+            selection = "scissors"
+            break;
+    }
+
+    return selection;
 }
 
 
-//------------------------------------------------------------------------------------
-
-/* 
-2. Create the playerSelection variable
-    - saves user input on promt
-    - At promt, you can use "p" or "P" for paper, "r" or "R" for rock etc 
-    - we convert input to the appropiate version
-*/
-function getPlayerSelection(){
-    let playerChoice = prompt("Choose 'R'- rock / 'P'- paper / 'S'-scissors");
-    let lowCasedChoice = playerChoice.toLowerCase();
-    let selected = "";
-    if (lowCasedChoice[0] == "r"){
-        selected = "rock";
-    }
-    else if (lowCasedChoice[0] == "p") {
-        selected = "paper";
-    }
-    else if (lowCasedChoice[0] == "s") {
-        selected = "scissors";
-    }
-    else {
-        alert("Invalid choice");
-        selected = false;
-    }
-
-    return selected;
-}
-
-//---------------------------------------------------------------------------------
-
-/* 
-3. Play a single round using "playerSelection" and "computerSelection"
-    - create the function "round" that takes in two variable
-    - check who wins
-    - create default message for winning, losing, tie
-    - return message for player
-    
-
-*/
-
-function round(computerChoice, playerChoice) {
+//Match our choice against computer's. Plays 1 round and then dynamically creates messages with the outcome
+function playRound(computerChoice, playerChoice) {
     
    
     //deciding outcomes
@@ -92,9 +57,9 @@ function round(computerChoice, playerChoice) {
 
     outcome();
 
-    //showing message
+    //Dynamic content creation with message
     function showMessage(result){
-        
+        const p = document.createElement("p");
         let winMessage = `You won! ${playerChoice} beats ${computerChoice}`;
         let loseMessage = `You lost! Your ${playerChoice} is beaten by ${computerChoice}`;
         let tieMessage = `It's a tie! You both have ${playerChoice}`;
@@ -102,15 +67,19 @@ function round(computerChoice, playerChoice) {
         switch (result) {
             case "win":
                 message = winMessage;
+                p.style.backgroundColor = "green";
                 break;
             case "lost":
                 message = loseMessage;
+                p.style.backgroundColor = "red";
                 break;
             case "tie":
                 message = tieMessage;
                 break;
         }
-        alert (message);
+        
+        p.textContent = message;
+        history.appendChild(p);
     }
     showMessage(outcome())
   
@@ -119,34 +88,67 @@ function round(computerChoice, playerChoice) {
     return outcome();
 }
 
-//------------------------------------------------------------------------------------
-/* 
-4.Create the function playGame() using the other functions
-    - we add the round() function as parameter;
-    - to keep score, we create the "won" variable set to zero
-    - we loop 5 times. After each game, we increment the "won" variable in case we win
-     
- 
- */
 
 
-function playGame() {
-    let won = 0;
-   
 
-    for(let i=1; i < 5; i++) {
-       let a = round(getComputerSelection(),getPlayerSelection());
-        if(a == "win") {
-            won +=1 ;
+
+
+
+//variables to reference html elements
+const history = document.querySelector("#history");
+const player = document.querySelector("#playerid");
+const computer = document.querySelector("#computerid");
+const buttons = document.querySelectorAll("img");
+
+//variables to store playstate
+let playerScore = 0;
+let computerScore = 0;
+let numberOfRounds = 0;
+
+
+//add eventlisteners to the html images which act like buttons
+
+for(i=0; i < buttons.length; i++){
+    buttons[i].addEventListener("click", function (e){
+        let x= e.target.id;
+        console.log(x);
+        let result = playRound(getComputerSelection(),getPlayerSelection(x));
+
+        //refresh playstate after a round
+        if(result == "win") {
+            playerScore+=1;
+            numberOfRounds += 1;
         }
-        
-    }
-    
-    alert("You won: " + won +  " / 5");
+        else if(result == "tie") {
+            numberOfRounds += 1;
+        }
+         else if(result == "lost") {
+            numberOfRounds += 1;
+            computerScore += 1;
+         }
+         //refresing the "Score" section in the htnl file with playstate
+         player.textContent = playerScore;
+         computer.textContent = computerScore;
 
+         //if we played 10 round, playstate resets
+         if(numberOfRounds > 10) {
+            if (computerScore > playerScore){
+                alert("Game has finished. You lost!")
+            } else if (computerScore < playerScore){
+                alert("Game has finished. You won!")
+            } else {
+                alert("It's a tie");
+            }
+            
+           
+            playerScore = 0;
+            computerScore = 0;
+            numberOfRounds =0;
+            history.textContent = "";
+         }
+    }) 
 }
 
-playGame();
 
 
 
