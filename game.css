@@ -7,12 +7,6 @@ body {
     margin: 0;
     flex-direction: row;
     justify-content: space-between;
-    
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-
-
    
   }
  
@@ -38,7 +32,6 @@ body {
     max-height: 100vh;
     height: 100vh;
     flex: 1;
-    
     align-items: center;
     justify-content: center;
     
